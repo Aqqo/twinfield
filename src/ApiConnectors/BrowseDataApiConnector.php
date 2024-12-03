@@ -74,6 +74,9 @@ class BrowseDataApiConnector extends BaseApiConnector
         $requestBrowseData = new BrowseData($code, $columns, $sortFields);
 
         $response = $this->sendXmlDocument($requestBrowseData);
+        if (!empty($response->getErrorMessages())) {
+            throw new Exception('Failed to send XmlDocument. Got error messages: ' . implode(', ', $response->getErrorMessages()));
+        }
         return BrowseDataMapper::map($response);
     }
 }
