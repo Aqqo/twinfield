@@ -125,7 +125,8 @@ class TransactionsDocument extends BaseDocument
             $linesElement->appendChild($lineElement);
 
             $dim1 = $transactionLine->getDim1();
-            if (!empty($dim1)) {
+            $isVatLine = $transactionLine->getLineType()->equals(LineType::VAT());
+            if (!$isVatLine || !empty($dim1)) {
                 $dim1Element = $this->createNodeWithTextContent('dim1', $dim1);
                 $lineElement->appendChild($dim1Element);
             }
@@ -233,7 +234,7 @@ class TransactionsDocument extends BaseDocument
             }
 
             if ($transactionLine->getDescription() !== null) {
-                $descriptionNode = $this->createTextNode($transactionLine->getDescription());
+                $descriptionNode = $this->createTextNode($transactionLine->getDescription()  ?? '');
                 $descriptionElement = $this->createElement('description');
                 $descriptionElement->appendChild($descriptionNode);
                 $lineElement->appendChild($descriptionElement);
