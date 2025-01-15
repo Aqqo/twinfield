@@ -76,7 +76,7 @@ class SalesTransactionLine extends BaseTransactionLine
     public function setDim2(?string $dim2): BaseTransactionLine
     {
         //if ($dim2 !== null && $this->getLineType()->equals(LineType::VAT())) {
-        //    throw Exception::invalidDimensionForLineType(2, $this);
+          //  throw Exception::invalidDimensionForLineType(2, $this);
         //}
 
         return parent::setDim2($dim2);
